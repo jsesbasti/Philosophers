@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 01:06:34 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/03 02:53:43 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:00:45 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_args
 	int				time_d;
 	int				time_e;
 	int				time_s;
-	int 			m_eat;
+	int				m_eat;
 	long int		start_t;
 	pthread_mutex_t	write_mutex;
 	pthread_mutex_t	dead;
@@ -74,6 +74,6 @@ void		ft_usleep(long int time);
 
 int			check_dead(t_philo *ph, int i);
 
-void		write_status(char *str, t_philo *ph); 
+void		write_status(char *str, t_philo *ph);
 
 #endif

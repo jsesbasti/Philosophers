@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:53:34 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/03 00:13:06 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:04:04 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	initialize(t_init *ini)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	ini->arg.start_t = actual_time();
 	if (ini->arg.start_t == 1)
 		return (1);
 	ini->arg.stop = 0;
 	ini->arg.nb_p_finish = 0;
 	init_mutex(ini);
-	while (i < ini->arg.n_philos)
+	while (++i < ini->arg.n_philos)
 	{
 		ini->philo[i].id = i + 1;
 		ini->philo[i].ms_eat = ini->arg.start_t;
@@ -45,7 +45,6 @@ int	initialize(t_init *ini)
 			ini->philo[i].r_fork = &ini->philo[0].l_fork;
 		else
 			ini->philo[i].r_fork = &ini->philo[i + 1].l_fork;
-		i++;
 	}
 	return (0);
 }
@@ -66,7 +65,7 @@ int	ft_strdigit(char **av, int i, int j)
 	return (0);
 }
 
-int	 check_args(int ac, char **av, t_init *ini)
+int	check_args(int ac, char **av, t_init *ini)
 {
 	if ((ac == 5 || ac == 6) && !ft_strdigit(av, 0, 1))
 	{

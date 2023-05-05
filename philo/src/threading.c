@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 00:02:47 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/03 03:14:55 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/05/04 19:02:06 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ int	threading(t_init *ini)
 	while (i < ini->arg.n_philos)
 	{
 		ini->philo[i].p_arg = &ini->arg;
-		if (pthread_create(&ini->philo[i].thread_id, NULL, thread, &ini->philo[i]) != 0)
+		if (pthread_create(&ini->philo[i].thread_id, NULL, \
+			thread, &ini->philo[i]) != 0)
 			return (ext("Can't create a thread"));
 		i++;
 	}
