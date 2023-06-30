@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:07:58 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/04 19:50:02 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/06/28 10:57:17 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 
 	if (check_args(ac, av, &p))
 		return (ext("Args error.\n", 2));
-	p.philo = malloc(sizeof(t_philo) * p.arg.total)
+	p.philo = malloc(sizeof(t_philo) * p.arg.total);
 	if (!p.philo)
 		return (ext("Can't allocate memory.\n", 2));
 	if (initialize(&p))

@@ -6,11 +6,13 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:57:57 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/04 19:34:29 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/06/29 19:10:46 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
+
+int	initialize(t_philo)
 
 size_t	ft_strlen(char *str)
 {
