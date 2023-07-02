@@ -6,15 +6,17 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 00:59:13 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/04 19:01:40 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/02 16:43:15 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ext(char *str)
+int	ext(char *str, int id)
 {
 	ft_putstr_fd(str, 2);
+	if (id)
+		printf("%d\n", id);
 	return (1);
 }
 
@@ -53,14 +55,14 @@ int	main(int ac, char **av)
 	t_init	ini;
 
 	if (check_args(ac, av, &ini))
-		return (ext("Invalid args\n"));
+		return (ext("Invalid args\n", 0));
 	ini.philo = malloc(sizeof(t_philo) * ini.arg.n_philos);
 	if (!ini.philo)
-		return (ext("No philos allocated"));
+		return (ext("No philos allocated", 0));
 	if (initialize(&ini) != 0 || threading(&ini) != 0)
 	{
 		free(ini.philo);
-		return (ext("Error innitializing"));
+		return (ext("Error innitializing", 0));
 	}
 	stop(&ini);
 }

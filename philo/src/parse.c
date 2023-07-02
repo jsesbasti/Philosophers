@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 17:53:34 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/05 18:57:23 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/02 16:44:01 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	check_args(int ac, char **av, t_init *ini)
 		{
 			ini->arg.m_eat = ft_atoi(av[5]);
 			if (ini->arg.m_eat == 0)
-				return (ext("They can't eat 0 times\n"));
+				return (ext("They can't eat 0 times\n", 0));
 		}
 		if (ini->arg.n_philos <= 0 || ini->arg.time_d <= 0 || \
 			ini->arg.time_e <= 0 || ini->arg.time_s <= 0)

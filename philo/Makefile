@@ -6,12 +6,12 @@
 #    By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:21:25 by jsebasti          #+#    #+#              #
-#    Updated: 2023/06/28 08:48:31 by jsebasti         ###   ########.fr        #
+#    Updated: 2023/07/02 17:26:55 by jsebasti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= philo
-INC_DIR		= inc/
+INC_DIR		= inc
 MKFL		= Makefile
 OBJ_DIR		= obj/
 

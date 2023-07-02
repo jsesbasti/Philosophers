@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 00:34:55 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/04 19:01:15 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/02 16:44:15 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ long int	actual_time(void)
 
 	time = 0;
 	if (gettimeofday(&current_time, NULL) == -1)
-		return (ext("Gettimeofday returned -1\n"));
+		return (ext("Gettimeofday returned -1\n", 0));
 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	return (time);
 }

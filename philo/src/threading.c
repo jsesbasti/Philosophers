@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 00:02:47 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/04 19:02:06 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:24:58 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	*is_dead(void *data)
 		write_status("died.\n", ph);
 		pthread_mutex_unlock(&ph->p_arg->write_mutex);
 		check_dead(ph, 1);
+		return (NULL);
 	}
 	pthread_mutex_unlock(&ph->p_arg->time_eat);
 	pthread_mutex_unlock(&ph->p_arg->finish);
@@ -63,10 +64,8 @@ void	actions(t_philo	*ph)
 	pthread_mutex_unlock(&ph->p_arg->write_mutex);
 	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	write_status("is eating.\n", ph);
-	pthread_mutex_lock(&ph->p_arg->time_eat);
-	ph->ms_eat = actual_time();
-	pthread_mutex_unlock(&ph->p_arg->time_eat);
 	pthread_mutex_unlock(&ph->p_arg->write_mutex);
+	ph->ms_eat = actual_time();
 	ft_usleep(ph->p_arg->time_e);
 	pthread_mutex_unlock(ph->r_fork);
 	pthread_mutex_unlock(&ph->l_fork);
@@ -112,7 +111,7 @@ int	threading(t_init *ini)
 		ini->philo[i].p_arg = &ini->arg;
 		if (pthread_create(&ini->philo[i].thread_id, NULL, \
 			thread, &ini->philo[i]) != 0)
-			return (ext("Can't create a thread"));
+			return (ext("Can't create a thread", i));
 		i++;
 	}
 	return (0);

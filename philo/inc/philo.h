@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 01:06:34 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/05/04 19:00:45 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/02 16:43:41 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_init
 	t_philo	*philo;
 }	t_init;
 
-int			ext(char *str);
+int			ext(char *str, int id);
 
 void		ft_putstr_fd(char *s, int fd);
 
