@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 00:02:47 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/07/02 17:24:58 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/04 21:35:28 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	actions(t_philo	*ph)
 	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	write_status("has taken a fork.\n", ph);
 	pthread_mutex_unlock(&ph->p_arg->write_mutex);
+	pthread_mutex_lock(ph->r_fork);
 	if (!ph->r_fork)
 	{
 		ft_usleep(ph->p_arg->time_d * 2);
 		return ;
 	}
-	pthread_mutex_lock(ph->r_fork);
 	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	write_status("has taken a fork.\n", ph);
 	pthread_mutex_unlock(&ph->p_arg->write_mutex);
