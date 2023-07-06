@@ -6,20 +6,14 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 00:02:47 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/07/04 21:35:28 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/06 16:54:13 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*is_dead(void *data)
+int	is_dead(t_philo *ph)
 {
-	t_philo	*ph;
-
-	ph = (t_philo *)data;
-	ft_usleep(ph->p_arg->time_d);
-	pthread_mutex_lock(&ph->p_arg->time_eat);
-	pthread_mutex_lock(&ph->p_arg->finish);
 	if (!check_dead(ph, 0) && !ph->finish && ((actual_time() - ph->ms_eat) \
 		>= (long)(ph->p_arg->time_d)))
 	{
@@ -29,11 +23,11 @@ void	*is_dead(void *data)
 		write_status("died.\n", ph);
 		pthread_mutex_unlock(&ph->p_arg->write_mutex);
 		check_dead(ph, 1);
-		return (NULL);
+		return (1);
 	}
 	pthread_mutex_unlock(&ph->p_arg->time_eat);
 	pthread_mutex_unlock(&ph->p_arg->finish);
-	return (NULL);
+	return (0);
 }
 
 void	sleep_think(t_philo *ph)
@@ -81,9 +75,9 @@ void	*thread(void *data)
 		ft_usleep(ph->p_arg->time_e / 10);
 	while (!check_dead(ph, 0))
 	{
-		pthread_create(&ph->thread_death_id, NULL, is_dead, data);
 		actions(ph);
-		pthread_detach(ph->thread_death_id);
+		if (is_dead(ph))
+			return (NULL);
 		if ((int)++ph->nb_eat == ph->p_arg->m_eat)
 		{
 			pthread_mutex_lock(&ph->p_arg->finish);
