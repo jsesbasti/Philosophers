@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 00:02:47 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/07/06 16:54:13 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/06 19:14:19 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	is_dead(t_philo *ph)
 	{
 		pthread_mutex_unlock(&ph->p_arg->time_eat);
 		pthread_mutex_unlock(&ph->p_arg->finish);
-		pthread_mutex_lock(&ph->p_arg->write_mutex);
 		write_status("died.\n", ph);
-		pthread_mutex_unlock(&ph->p_arg->write_mutex);
 		check_dead(ph, 1);
 		return (1);
 	}
@@ -32,33 +30,23 @@ int	is_dead(t_philo *ph)
 
 void	sleep_think(t_philo *ph)
 {
-	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	write_status("is sleeping.\n", ph);
-	pthread_mutex_unlock(&ph->p_arg->write_mutex);
 	ft_usleep(ph->p_arg->time_s);
-	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	write_status("is thinking\n", ph);
-	pthread_mutex_unlock(&ph->p_arg->write_mutex);
 }
 
 void	actions(t_philo	*ph)
 {
 	pthread_mutex_lock(&ph->l_fork);
-	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	write_status("has taken a fork.\n", ph);
-	pthread_mutex_unlock(&ph->p_arg->write_mutex);
-	pthread_mutex_lock(ph->r_fork);
 	if (!ph->r_fork)
 	{
-		ft_usleep(ph->p_arg->time_d * 2);
+		ft_usleep(ph->p_arg->time_d);
 		return ;
 	}
-	pthread_mutex_lock(&ph->p_arg->write_mutex);
+	pthread_mutex_lock(ph->r_fork);
 	write_status("has taken a fork.\n", ph);
-	pthread_mutex_unlock(&ph->p_arg->write_mutex);
-	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	write_status("is eating.\n", ph);
-	pthread_mutex_unlock(&ph->p_arg->write_mutex);
 	ph->ms_eat = actual_time();
 	ft_usleep(ph->p_arg->time_e);
 	pthread_mutex_unlock(ph->r_fork);

@@ -6,7 +6,7 @@
 /*   By: jsebasti <jsebasti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 00:34:55 by jsebasti          #+#    #+#             */
-/*   Updated: 2023/07/02 16:44:15 by jsebasti         ###   ########.fr       */
+/*   Updated: 2023/07/06 19:15:30 by jsebasti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	write_status(char *str, t_philo *ph)
 {
 	long int		time;
 
+	pthread_mutex_lock(&ph->p_arg->write_mutex);
 	time = -1;
 	time = actual_time() - ph->p_arg->start_t;
 	if (time >= 0 && time <= 2147483647 && !check_dead(ph, 0))
@@ -23,6 +24,7 @@ void	write_status(char *str, t_philo *ph)
 		printf("%ld ", time);
 		printf("Philo %d %s", ph->id, str);
 	}
+	pthread_mutex_unlock(&ph->p_arg->write_mutex);
 }
 
 void	ft_usleep(long int time)
