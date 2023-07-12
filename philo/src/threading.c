@@ -17,14 +17,10 @@ int	is_dead(t_philo *ph)
 	if (!check_dead(ph, 0) && !ph->finish && ((actual_time() - ph->ms_eat) \
 		>= (long)(ph->p_arg->time_d)))
 	{
-		pthread_mutex_unlock(&ph->p_arg->time_eat);
-		pthread_mutex_unlock(&ph->p_arg->finish);
 		write_status("died.\n", ph);
 		check_dead(ph, 1);
 		return (1);
 	}
-	pthread_mutex_unlock(&ph->p_arg->time_eat);
-	pthread_mutex_unlock(&ph->p_arg->finish);
 	return (0);
 }
 
