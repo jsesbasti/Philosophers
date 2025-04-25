@@ -62,3 +62,10 @@ int	check_dead(t_philo *ph, int i)
 	pthread_mutex_unlock(&ph->p_arg->dead);
 	return (0);
 }
+
+void	print_status(char *str, t_init *table, t_philo )
+{
+	pthread_mutex_lock(&table->print_mtx);
+	printf("%s", str);
+	pthread_mutex_unlock(&table->print_mtx);
+}

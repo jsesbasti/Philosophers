@@ -17,24 +17,3 @@ void	ft_putstr_fd(char *s, int fd)
 	write(fd, s, sizeof(char) * ft_strlen(s));
 }
 
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-int	ft_atoi(char *str)
-{
-	int		i;
-	long	sum;
-
-	sum = 0;
-	i = -1;
-	while (str[++i])
-		sum = (sum * 10) + (str[i] - 48);
-	return (sum);
-}

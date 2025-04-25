@@ -19,61 +19,67 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define ERROR 1
+# define SUCCESS 0
+
+typedef enum e_bool
+{
+	false,
+	true
+}	t_bool;
+
 typedef struct s_args
 {
-	int				n_philos;
-	int				time_d;
-	int				time_e;
-	int				time_s;
-	int				m_eat;
-	long int		start_t;
-	pthread_mutex_t	write_mutex;
-	pthread_mutex_t	dead;
-	pthread_mutex_t	time_eat;
-	pthread_mutex_t	finish;
-	int				nb_p_finish;
-	int				stop;
+	unsigned int	num_philos;
+	unsigned int	time_die;
+	unsigned int	time_eat;
+	unsigned int	time_sleep;
+	unsigned int	must_eat;
+	long int		start_time;
 }	t_args;
 
 typedef struct s_philo
 {
-	int					id;
+	unsigned int		id;
 	pthread_t			thread_id;
-	pthread_t			thread_death_id;
-	pthread_mutex_t		*r_fork;
-	pthread_mutex_t		l_fork;
-	t_args				*p_arg;
-	long int			ms_eat;
+	pthread_mutex_t		r_fork;
+	pthread_mutex_t		*l_fork;
 	unsigned int		nb_eat;
-	int					finish;
+	int					finished;
+
 }	t_philo;
 
 typedef struct s_init
 {
-	t_args	arg;
-	t_philo	*philo;
+	t_args	init_vars;
+	t_philo	*philos;
+	pthread_mutex_t	print_mtx;
 }	t_init;
 
-int			ext(char *str, int id);
+int				ext(char *str, int id);
 
-void		ft_putstr_fd(char *s, int fd);
+void			ft_putstr_fd(char *s, int fd);
 
-size_t		ft_strlen(char *s);
+size_t			ft_strlen(char *s);
 
-int			ft_atoi(char *str);
+t_bool			ft_isdigit(char c);
 
-int			check_args(int ac, char **av, t_init *ini);
+unsigned int	ft_atoi(char *str);
 
-int			initialize(t_init *ini);
+void			*ft_calloc(size_t count, size_t size);
 
-long int	actual_time(void);
+t_bool			check_args(int ac, char **av, t_init *ini);
 
-int			threading(t_init *ini);
+int				initialize(t_init *ini);
 
-void		ft_usleep(long int time);
+long int		actual_time(void);
 
-int			check_dead(t_philo *ph, int i);
+int				threading(t_init *ini);
 
-void		write_status(char *str, t_philo *ph);
+void			ft_usleep(long int time);
+
+int				check_dead(t_philo *ph, int i);
+
+void			write_status(char *str, t_philo *ph);
 
 #endif

@@ -49,20 +49,3 @@ void	stop(t_init *ini)
 		printf("Each philosopher ate %d time(s)\n", ini->arg.m_eat);
 	free(ini->philo);
 }
-
-int	main(int ac, char **av)
-{
-	t_init	ini;
-
-	if (check_args(ac, av, &ini))
-		return (ext("Invalid args\n", 0));
-	ini.philo = malloc(sizeof(t_philo) * ini.arg.n_philos);
-	if (!ini.philo)
-		return (ext("No philos allocated", 0));
-	if (initialize(&ini) != 0 || threading(&ini) != 0)
-	{
-		free(ini.philo);
-		return (ext("Error innitializing", 0));
-	}
-	stop(&ini);
-}

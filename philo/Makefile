@@ -11,34 +11,46 @@
 # **************************************************************************** #
 
 NAME		= philo
-INC_DIR		= inc
-MKFL		= Makefile
+INC_DIR		= inc/
 OBJ_DIR		= obj/
+SRC_DIR		= src/
 
 
 # ----Libraryes----
-PHILO_HEADE	= $(INC_DIR)/philo.h
 # =============
 
 # -------------
 RM = rm -rf
 MP = mkdir -p
-CFLAGS = -Werror -Wextra -Wall -O2 #-fsanitize=thread
-LIBC = ar -rcs
+CFLAGS = -Werror -Wextra -Wall -g -O2 #-fsanitize=thread
+
 # =============
 
-SRC	=	src/philo.c 				\
-		src/parse.c					\
-		src/utils.c					\
-		src/utils_philo.c			\
-		src/threading.c				\
+UTILS =	utils/ft_calloc.c	\
+		utils/ft_atoi.c		\
+		utils/ft_isdigit.c	\
+		utils/ft_strlen.c	\
+		utils/ft_strisdigit.c
+
+TIME =	time/utils_philo.c
+
+THREADING = threading/threading.c	\
+			threading/philo.c
+
+INIT =	init/parse.c \
+		init/initialize.c
+
+SRC	=	$(addprefix $(SRC_DIR), $(UTILS))	\
+		$(addprefix $(SRC_DIR), $(TIME))	\
+		$(addprefix $(SRC_DIR), $(THREADING)) \
+		$(addprefix $(SRC_DIR), $(INIT))
 
 # -------------
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 DEP = $(addsuffix .d, $(basename $(OBJ)))
 # =============
 
-$(OBJ_DIR)%.o: %.c $(MKFL)
+$(OBJ_DIR)%.o: %.c
 	@$(MP) $(dir $@)
 	$(CC) $(CFLAGS) -MMD -I $(INC_DIR) -c $< -o $@
 
