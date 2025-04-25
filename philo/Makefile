@@ -26,11 +26,12 @@ CFLAGS = -Werror -Wextra -Wall -g -O2 #-fsanitize=thread
 
 # =============
 
-UTILS =	utils/ft_calloc.c	\
-		utils/ft_atoi.c		\
-		utils/ft_isdigit.c	\
-		utils/ft_strlen.c	\
-		utils/ft_strisdigit.c
+UTILS =	utils/ft_calloc.c		\
+		utils/ft_atoi.c			\
+		utils/ft_isdigit.c		\
+		utils/ft_strlen.c		\
+		utils/ft_strisdigit.c	\
+		utils/ft_putstr_fd.c
 
 TIME =	time/utils_philo.c
 
