@@ -17,7 +17,9 @@ void	init_forks(t_philo *philo, t_philo *philos, unsigned int num_philos)
 	size_t	philo_pos;
 	
 	philo_pos = philo->id - 1;
-	pthread_mutex_init(&philo->l_fork, NULL);
+	pthread_mutex_init(&philo->r_fork, NULL);
+	if (num_philos == 1)
+		return ;
 	if (philo_pos == num_philos - 1)
 		philo->l_fork = &philos[0].r_fork;
 	else
@@ -30,19 +32,20 @@ int	initialize(t_init *ini)
 	t_args	*vars;
 	t_philo	*philos;
 
-	i = -1;
+	i = 0;
 	vars = &ini->init_vars;
 	philos = ini->philos;
 	vars->start_time = actual_time();
 	if (vars->start_time == 1)
 		return (ERROR);
-	while (++i < vars->num_philos)
+	while (i < vars->num_philos)
 	{
 		philos[i].id = i + 1;
 		philos[i].nb_eat = 0;
 		philos[i].finished = false;
 		philos[i].l_fork = NULL;
 		init_forks(&philos[i], philos, vars->num_philos);
+		i++;
 	}
 	return (SUCCESS);
 }
